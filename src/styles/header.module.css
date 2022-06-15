@@ -1,0 +1,13 @@
+.logo{
+    width: 200pxpx !important;
+    
+}
+
+.input{
+    color: white;
+    background-color: #272d36
+   
+}
+.input.Mui-active{
+    background-color: aliceblue;
+}
