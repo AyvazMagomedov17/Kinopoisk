@@ -2,6 +2,7 @@ import { Grid, Stack, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { useMaxWidth900 } from "../../../hooks/mediaQuery"
 import { EProfessionKey } from "../../../Interfaces/enums/EProfessionKey"
 import { IAwards } from "../../../Interfaces/IAwards"
 import { IFilm } from "../../../Interfaces/IFilm"
@@ -9,6 +10,7 @@ import { IStaff } from "../../../Interfaces/IStaff"
 import { setCastFilterEv } from "../../../models/castFilter"
 import FilmAwards from "./FilmAwards"
 import FilmInfoItem from "./FilmInfoItem"
+import FilmMainActors from "./FilmMainActors"
 import FilmMainLink from "./FilmMainLink"
 import FilmRatingItem from "./FilmRatingItem"
 
@@ -19,6 +21,7 @@ type Props = {
 }
 
 const FilmMainLeft = ({ film, awards, staff }: Props) => {
+    const _900px = useMaxWidth900()
     const handleClickOnActors = () => {
         setCastFilterEv(EProfessionKey.ACTOR)
     }
@@ -30,7 +33,7 @@ const FilmMainLeft = ({ film, awards, staff }: Props) => {
                 actors.push(
 
                     <FilmMainLink key={item.staffId}>
-                        <Link href={`/persons/${item.staffId}`}>
+                        <Link href={`/name/${item.staffId}`}>
                             <Typography sx={{ cursor: 'pointer' }} fontSize={13} paddingTop={1}>{item.nameRu}</Typography>
                         </Link>
                     </FilmMainLink>
@@ -42,23 +45,15 @@ const FilmMainLeft = ({ film, awards, staff }: Props) => {
         }
     })
     return (
-        <>
-            <img src={film.posterUrl} />
+        <Grid container flexDirection='column' alignItems='center'>
+            <img style={{ 'marginBottom': '20px' }} src={film.posterUrl} />
 
-            <FilmAwards awards={awards} />
-            <FilmMainLink color='rgba(255, 255, 255, 1)'>
-                <Link href={asPath + `/cast`}>
+            {!_900px && <>
+                <FilmAwards awards={awards} />
+                <FilmMainActors staff={staff} />
+            </>}
 
-                    <Typography sx={{ cursor: 'pointer' }} paddingTop={4} variant="h5">
-                        <span onClick={handleClickOnActors}>Актеры</span>
-                    </Typography>
-                </Link>
-            </FilmMainLink>
-
-
-            {actors}
-
-        </>
+        </Grid>
 
     )
 }

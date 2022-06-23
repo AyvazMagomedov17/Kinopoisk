@@ -17,7 +17,7 @@ const ReviewsTotal = ({ total, totalNegativeReviews, totalNeutralReviews, totalP
 
     return (
         <>
-            <Grid flexDirection='row' container>
+            <Grid container>
                 <ReviewTotalItem image={<ImportContactsIcon />} count={total} title='Всего' />
                 <ReviewTotalItem type={EReviewsSortType.USER_POSITIVE_RATING_DESC} image={<ThumbUpIcon />} count={totalPositiveReviews} title='Положительные' />
                 <ReviewTotalItem type={EReviewsSortType.USER_NEGATIVE_RATING_DESC} image={<ThumbDownIcon />} count={totalNegativeReviews} title='Отрицательные' />

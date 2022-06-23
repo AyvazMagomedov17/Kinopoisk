@@ -2,12 +2,14 @@ import { Grid, Paper, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useMaxWidthQuery } from '../../../../hooks/mediaQuery'
 import { ISimilarsItem } from '../../../../Interfaces/ISimilars'
 
 type Props = {}
 
 const SimilarFilmsItem = ({ filmId, nameEn, nameOriginal, nameRu, posterUrl, posterUrlPreview, relationType }: ISimilarsItem) => {
     const router = useRouter()
+    const _360px = useMaxWidthQuery(360)
     const handleClick = () => {
         router.push(`/film/${filmId}`)
     }
@@ -16,18 +18,21 @@ const SimilarFilmsItem = ({ filmId, nameEn, nameOriginal, nameRu, posterUrl, pos
             <Grid sx={
                 {
                     'maxWidth': 140,
-                    'marginRight': '30px',
+                    'marginRight': '15px',
                     'cursor': 'pointer',
                     'transition': 'all 0.3s',
                     '&:hover': {
                         'transform': 'scale(1.1)',
                         'transition': 'all 0.3s'
+                    },
+                    '&::lastChild': {
+                        'marginRight': '0'
                     }
                 }
             } flexDirection='row' container>
                 <Grid sx={{ 'height': '210px' }} item >
-                    <Paper sx={{ 'width': 140, 'height': '210px' }}>
-                        <img style={{ 'height': '210px', 'objectFit': 'cover' }} src={posterUrl || posterUrlPreview} alt="" />
+                    <Paper sx={{ 'width': _360px ? 100 : 140, 'height': _360px ? '150px' : '210px' }}>
+                        <img style={{ 'height': _360px ? '150px' : '210px', 'objectFit': 'cover' }} src={posterUrl || posterUrlPreview} alt="" />
                     </Paper>
 
                     <Typography color='rgba(62, 18, 134, 1)' fontSize={14}>{nameRu}</Typography>

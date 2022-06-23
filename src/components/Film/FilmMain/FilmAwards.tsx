@@ -28,7 +28,7 @@ const PopupAwardItem = ({ awards, color, title }: PopupAwardItemsType) => {
                 return <>
                     <Typography fontSize={17}>{item.nominationName}</Typography>
                     <FilmMainLink>
-                        {item.persons[0] ? <Link href={'/persons/' + item.persons[0].kinopoiskId}>
+                        {item.persons[0] ? <Link href={'/name/' + item.persons[0].kinopoiskId}>
                             <Typography fontSize={12}><>({item.persons[0].nameRu || item.persons[0].nameEn})</></Typography>
                         </Link> : null}
 
@@ -99,18 +99,14 @@ const FilmAwards = ({ awards }: Props) => {
         return (
             <>
                 <Box sx={{}}>
-                    <Typography marginBottom={4} paddingTop={5} variant="h5">Награды</Typography>
-                    <Box onClick={handleOpen} sx={{ 'cursor': 'pointer', 'maxWidth': '100px' }}>
+                    <Typography marginBottom={4} paddingTop={4} variant="h5">Награды</Typography>
+                    <Box onClick={handleOpen} sx={{ 'cursor': 'pointer', 'maxWidth': '100px', }}>
                         <img style={{ 'textAlign': 'center', 'display': 'inline', 'maxWidth': '50px', 'cursor': 'pointer', 'marginRight': '10px' }} src={awardImg} alt="" />
                         <Box sx={{ 'marginTop': '-30px' }} display='inline-block'>
                             <Box sx={{ 'width': '30px', height: '30px', 'backgroundColor': 'rgba(130, 61, 61, 0.8)', 'borderRadius': '50%', 'justifyContent': 'center', 'alignItems': 'center' }} marginTop='-20px' display='flex'>{oscarsWin.length + oscarsNomination.length}
                             </Box>
                         </Box>
                     </Box>
-
-
-
-
                 </Box>
                 <Modal aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description" closeAfterTransition

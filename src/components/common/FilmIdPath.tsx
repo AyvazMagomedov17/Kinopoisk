@@ -9,7 +9,7 @@ import Cast from "../Cast/Cast"
 import FilmInfoMain from "../Film/FilmInfo/FilmInfoMain"
 import Images from "../Images/Images"
 import Reviews from "../Reviews/Reviews"
-import Header from "./Header"
+import Header from "./Header/Header"
 
 type Props = {
     film: IMainFilm

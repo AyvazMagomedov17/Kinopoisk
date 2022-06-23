@@ -9,7 +9,7 @@ const FilmFactItem = ({ spoiler, text, type }: IFact) => {
 
     return (
         <Grid alignItems='center' sx={{ 'marginBottom': '17px' }} container>
-            <Grid item xs={0.4}>
+            <Grid item xs={0.7}>
                 ◉
             </Grid>
             <Grid color={type === EFactType.FACT ? 'rgba(13, 72, 2, 1)' : 'rgba(155, 0, 0, 1)'} item xs={10}>

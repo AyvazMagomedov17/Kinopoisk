@@ -6,6 +6,7 @@ import React, { useEffect } from 'react';
 import Router from 'next/router';
 import { useStore } from 'effector-react';
 import { $tabs, changeCategoriesEv, changeFilterEv } from '../../models/tabs';
+import PersonIcon from '@mui/icons-material/Person';
 type Props = {}
 
 const Navbar = (props: Props) => {
@@ -17,7 +18,21 @@ const Navbar = (props: Props) => {
     };
 
     const handleClickOnFilms = () => {
-        Router.push('/categories')
+        Router.push('/films/tops')
+        setTimeout(() => {
+            changeFilterEv(0)
+
+        }, 200);
+    }
+    const handleClickOnSeries = () => {
+        Router.push('/series/genres')
+        setTimeout(() => {
+            changeFilterEv(0)
+
+        }, 200);
+    }
+    const handleClickOnPersons = () => {
+        Router.push('/persons')
         setTimeout(() => {
             changeFilterEv(0)
 
@@ -29,7 +44,8 @@ const Navbar = (props: Props) => {
                 <nav className={s.menu}>
                     <Tabs sx={{ borderRight: 1, borderColor: 'gray' }} orientation='vertical' value={tabs.categories} onChange={handleChange} aria-label="icon position tabs example">
                         <Tab onClick={handleClickOnFilms} icon={<MovieIcon />} iconPosition='start' label='Фильмы' />
-                        <Tab icon={<CastConnectedIcon />} iconPosition='start' label='Сериалы' />
+                        <Tab onClick={handleClickOnSeries} icon={<CastConnectedIcon />} iconPosition='start' label='Сериалы' />
+                        <Tab onClick={handleClickOnPersons} icon={<PersonIcon />} iconPosition='start' label='Персоны' />
                     </Tabs>
                 </nav>
             </div>

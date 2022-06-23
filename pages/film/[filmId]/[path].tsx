@@ -3,8 +3,9 @@ import { useStore } from 'effector-react'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import FilmIdPath from '../../../src/components/common/FilmIdPath'
-import { setIsOnCastPage } from '../../../src/models/castFilter'
-import { $mainFilm, $reviewsFiltres, getAwardsAt, getFilmAt, getImagesAt, getReviewsAt, getStaffAt, IMainFilm, setFilmId, setImagesCurrentPage, setImagesFilter, setReviewsOrder, setReviewsPage } from '../../../src/models/film'
+import Page404 from '../../../src/components/common/Page404'
+import TitleLayout from '../../../src/layouts/TitleLayout'
+import { $mainFilm, getAwardsAt, getFilmAt, getImagesAt, getReviewsAt, getStaffAt, IMainFilm, setFilmId, setImagesCurrentPage, setImagesFilter, setReviewsOrder, setReviewsPage } from '../../../src/models/film'
 import { AWARDS, CAST, IMAGES, REVIEWS } from '../../../src/paths/filmPaths'
 
 type Props = {
@@ -12,11 +13,19 @@ type Props = {
 }
 
 const Path = ({ film }: Props) => {
-
-
+    const path = useRouter().query.path
+    const title = path === AWARDS ? ' / Награды' : path === CAST ? ' / Создатели' : path === IMAGES ? ' / Изображения' : path === REVIEWS ? ' / Рецензии' : ''
+    if (path && path !== CAST && path !== AWARDS && path !== IMAGES && path !== REVIEWS) {
+        return <TitleLayout title='404 Страница не найдена'>
+            <Page404 />
+        </TitleLayout>
+    }
     return (
         <>
-            <FilmIdPath film={film} />
+            <TitleLayout title={`${film.$film.nameRu}${title}`}>
+                <FilmIdPath film={film} />
+            </TitleLayout>
+
         </>
 
     )

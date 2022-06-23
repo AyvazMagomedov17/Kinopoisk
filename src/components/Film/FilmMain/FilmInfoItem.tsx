@@ -11,11 +11,16 @@ type Props = {
 const FilmInfoItem = ({ title, info }: Props) => {
     return (
         <Grid marginBottom={2} item xs={12}>
-            <Box sx={{ 'display': 'flex' }}>
-                <Typography sx={{ 'flex': '0 0 260px' }} paddingRight={7} fontSize={15} color='rgba(94, 91, 93, 1)'>{title}:</Typography>
-                <Typography sx={{ 'flex': '1 0 300px', }} fontSize={16} >{info}</Typography>
+            <Grid container >
+                <Grid xs={6}>
+                    <Typography paddingRight={7} fontSize={15} color='rgba(94, 91, 93, 1)'>{title}:</Typography>
+                </Grid>
+                <Grid sx={{ 'maxWidth': '200px', 'wordBreak': 'break-word' }} xs={6}>
+                    <Typography fontSize={16} >{info}</Typography>
+                </Grid>
 
-            </Box>
+
+            </Grid>
 
         </Grid>
     )

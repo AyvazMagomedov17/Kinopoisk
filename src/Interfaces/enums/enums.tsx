@@ -16,6 +16,14 @@ export enum EType {
     MINI_SERIES = 'MINI_SERIES',
     TV_SHOW = 'TV_SHOW'
 }
+export enum ETypeRu {
+    ALL = 'Все',
+    FILM = 'Фильмы',
+    VIDEO = 'Видео',
+    TV_SERIES = 'Сериалы',
+    MINI_SERIES = 'Мини-сериалы',
+    TV_SHOW = 'Шоу'
+}
 export enum EGetTopOfFilms {
     top250 = 'TOP_250_BEST_FILMS',
     top100 = 'TOP_100_POPULAR_FILMS',

@@ -56,5 +56,7 @@ export const filmApi = {
         const resp = await instanse.get(`api/v2.2/films/${fiilmId}/images?type=${type}&page=${page}`)
         const data: IImages = resp.data
         return data
-    }
+    },
+
+
 }

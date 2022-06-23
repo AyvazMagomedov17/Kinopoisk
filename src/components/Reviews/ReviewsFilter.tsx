@@ -13,13 +13,14 @@ const ReviewsFilter = (props: Props) => {
     const router = useRouter()
     const reviewsFiltres = useStore($reviewsFiltres)
 
-    const order2 = router.query.order
+    const order = router.query.order
     const page = router.query.page
     return (
         <Formik enableReinitialize initialValues={{
-            type: reviewsFiltres.$reviewsOrder
+            type: order || EReviewsSortType.DATE_DESC
         }} onSubmit={values => {
-            setReviewsOrder(values.type)
+            const type = values.type
+            router.replace(router.query.page && router.query.order ? router.asPath.replace(`page=${page}&order=${order}`, `page=${1}&order=${type}`) : router.asPath + `?page=${1}&order=${type}`)
         }} >
             {({ values, handleChange, handleSubmit }) => (
                 <>

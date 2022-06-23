@@ -1,3 +1,4 @@
+
 export enum EProfessionKey {
     WRITER = 'WRITER',
     OPERATOR = 'OPERATOR',
@@ -26,5 +27,24 @@ export enum EProfessionKeyRu {
     VOICE_DIRECTOR = 'Режиссеры дубляжа',
     PRODUCER = 'Продюсеры',
     UNKNOWN = 'UNKNOWN '
+}
+
+export enum EExtendedProffesionKey {
+    WRITER = 'WRITER',
+    OPERATOR = 'OPERATOR',
+    EDITOR = 'EDITOR',
+    COMPOSER = 'COMPOSER',
+    PRODUCER_USSR = 'PRODUCER_USSR',
+    TRANSLATOR = 'TRANSLATOR',
+    DIRECTOR = 'DIRECTOR',
+    DESIGN = 'DESIGN',
+    ACTOR = 'ACTOR',
+    VOICE_DIRECTOR = 'VOICE_DIRECTOR',
+    PRODUCER = 'PRODUCER',
+    UNKNOWN = 'UNKNOWN',
+    HIMSELF = 'HIMSELF',
+    HERSELF = 'HERSELF',
+    HRONO_TITR_MALE = 'HRONO_TITR_MALE',
+    HRONO_TITR_FEMALE = 'HRONO_TITR_FEMALE'
 }
 

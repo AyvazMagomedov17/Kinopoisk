@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { IAward, IAwards } from '../../Interfaces/IAwards'
 import { IFilm } from '../../Interfaces/IFilm'
 import FilmIdPathTitle from '../common/FilmIdPathTitle'
+import NoItems from '../common/NoItems'
 import AwardItems from './AwardItems/AwardItems'
 
 type Props = {
@@ -41,16 +42,16 @@ const Awards = ({ film, awards }: Props) => {
         }
     }))
 
-    const items = arrayOfSortedAwards[0].map(item => <AwardItems name={item.name} items={item.items} />)
+    const items = arrayOfSortedAwards[0].map(item => <AwardItems key={item.name} name={item.name} items={item.items} />)
     return (
         <Grid container>
             <Grid item xs={12}>
                 <FilmIdPathTitle descrition='Награды' film={film} />
             </Grid>
-
-            <Grid item xs={9}>
+            {awards.total === 0 ? <NoItems text='Наград' /> : <Grid item xs={12}>
                 {items}
-            </Grid>
+            </Grid>}
+
 
         </Grid>
     )

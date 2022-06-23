@@ -12,7 +12,7 @@ const AwardPerson = ({ nameEn, nameRu, kinopoiskId }: IAwardPerson) => {
             <FilmMainLink color='rgba(48, 122, 191, 1)'>
                 <Link href={`/name/${kinopoiskId}`}>
                     <Typography fontSize={12}>
-                        {nameRu}
+                        {nameRu || nameEn}
                     </Typography>
                 </Link>
 

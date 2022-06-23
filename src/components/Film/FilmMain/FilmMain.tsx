@@ -8,6 +8,10 @@ import FilmMainLeft from './FilmMainLeft';
 import FilmMainCenter from './FilmMainCenter';
 import FilmMainRight from './FilmMainRight';
 import { IAwards } from '../../../Interfaces/IAwards';
+import { useMaxWidth900, useMaxWidthQuery } from '../../../hooks/mediaQuery';
+import FilmAwards from './FilmAwards';
+import FilmMainActors from './FilmMainActors';
+import FilmMainBoxOffice from './FilmMainBoxOffice';
 
 type Props = {
     film: IFilm
@@ -21,8 +25,9 @@ const FilmMain = ({ film, staff, awards }: Props) => {
     const backroundColor = 'black'
     const boxShadow = film.coverUrl ? 'inset 0 0 0 200vw rgba(0,0,0, 0.8)' : 'none'
     const colorOfText = 'white'
-
-
+    const _900px = useMaxWidth900()
+    const _600px = useMaxWidthQuery(600)
+    const _420px = useMaxWidthQuery(420)
 
     const styles = {
         container: {
@@ -58,15 +63,27 @@ const FilmMain = ({ film, staff, awards }: Props) => {
         <Box sx={styles.container}>
             <Box sx={styles.backround}>
                 <Container sx={{ paddingTop: 10 }} fixed>
-                    <Grid color={colorOfText} container>
-                        <Grid xs={3} item>
+                    <Grid justifyContent='center' color={colorOfText} container>
+                        <Grid xs={_900px ? 12 : 3} item>
                             <FilmMainLeft staff={staff} awards={awards} film={film} />
                         </Grid>
-                        <Grid xs={6} item>
+                        <Grid xs={_900px ? 12 : 6} item>
                             <FilmMainCenter staff={staff} film={film} />
                         </Grid>
-                        <Grid xs={3} item>
-                            <FilmMainRight film={film} />
+                        <Grid xs={_900px ? 12 : 3} item>
+                            {!_900px && <FilmMainRight film={film} />}
+                            {_900px ?
+                                <Grid justifyContent='center' container>
+                                    <Grid item xs={4}>
+                                        <FilmAwards awards={awards} />
+                                    </Grid>
+                                    <Grid item xs={_600px ? 3 : 4}>
+                                        <FilmMainActors staff={staff} />
+                                    </Grid>
+                                    <Grid item xs={_420px ? 9 : _600px ? 8 : 4}>
+                                        <FilmMainBoxOffice />
+                                    </Grid>
+                                </Grid> : null}
                         </Grid>
                     </Grid>
                 </Container>

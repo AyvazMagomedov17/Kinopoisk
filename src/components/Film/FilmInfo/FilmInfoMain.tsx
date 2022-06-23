@@ -1,12 +1,16 @@
 import { Grid, Typography } from '@mui/material'
+import { useStore } from 'effector-react'
 import React from 'react'
 import { IFacts } from '../../../Interfaces/IFacts'
 import { IFilm } from '../../../Interfaces/IFilm'
 import { IReviews } from '../../../Interfaces/IReviews'
+import { ISeasons } from '../../../Interfaces/ISeasons'
 import { ISimilars } from '../../../Interfaces/ISimilars'
+import { $seasons } from '../../../models/film'
 import FilmFacts from './FilmFacts/FilmFacts'
 import FilmInfoReviews from './FilmInfoReviews/FilmInfoReviews'
 import FilmInfoTitle from './FilmInfoTitle'
+import Seasons from './Seasons/Seasons'
 import SliderOfSImilarsFilms from './SimilarFilms/SliderOfSImilarsFilms'
 
 type Props = {
@@ -14,14 +18,17 @@ type Props = {
     similars: ISimilars
     facts: IFacts
     reviews: IReviews
+
 }
 
 const FilmInfoMain = ({ film, similars, facts, reviews }: Props) => {
+    const seasons = useStore($seasons)
+
     return (
         <>
-            <Grid xs={9} item>
+            <Grid xs={11} item>
                 <FilmInfoTitle>Описание:</FilmInfoTitle>
-                <Typography fontStyle='italic' fontSize={17}>{film.description}</Typography>
+                {film.description ? <Typography fontStyle='italic' fontSize={17}>{film.description}</Typography> : <Typography fontStyle='italic' fontSize={17}>Описания нет</Typography>}
             </Grid>
             <Grid xs={12} item>
                 {similars.total ? <>
@@ -32,17 +39,26 @@ const FilmInfoMain = ({ film, similars, facts, reviews }: Props) => {
 
             {facts.total ?
                 <>
-                    <Grid xs={9} item>
+                    <Grid xs={12} item>
                         <FilmInfoTitle>Знаете ли вы, что…</FilmInfoTitle>
                         <FilmFacts facts={facts} />
                     </Grid>
 
-                </> : null}
-            {reviews.total ?
-                <Grid xs={12} item>
-                    <FilmInfoTitle>Отзывы:</FilmInfoTitle>
-                    <FilmInfoReviews reviews={reviews} />
-                </Grid> : null}
+                </> : null
+            }
+            {
+                seasons?.total ? <Grid xs={12} item>
+                    <FilmInfoTitle>Информация о сезонах</FilmInfoTitle>
+                    <Seasons seasons={seasons} />
+                </Grid> : null
+            }
+            {
+                reviews.total ?
+                    <Grid xs={12} item>
+                        <FilmInfoTitle>Отзывы:</FilmInfoTitle>
+                        <FilmInfoReviews reviews={reviews} />
+                    </Grid> : null
+            }
 
         </>
 

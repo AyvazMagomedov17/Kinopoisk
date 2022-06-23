@@ -10,7 +10,7 @@ import { $castFilter, setIsOnCastPage } from "../../models/castFilter"
 import { $staff } from "../../models/film"
 import FilmIdPath from "../common/FilmIdPath"
 import FilmIdPathTitle from "../common/FilmIdPathTitle"
-import Header from "../common/Header"
+import Header from "../common/Header/Header"
 import TitlePage from "../common/TitlePage"
 import CastFIlter from "./CastFIlter"
 import CastItems from "./CastItems"
@@ -29,6 +29,7 @@ const Cast = ({ staff, film }: Props) => {
     useEffect(() => {
         if (castFilter !== EProfessionKey.UNKNOWN) {
             setLocalStaff(staff?.filter(item => {
+
                 return item.professionKey === castFilter
             }))
         } else {
@@ -52,9 +53,17 @@ const Cast = ({ staff, film }: Props) => {
     return (
         <>
 
-            <Grid paddingTop={1} container justifyContent='space-between' alignItems='center'>
-                <FilmIdPathTitle film={film} descrition={castFilterTitle} />
-                <CastFIlter />
+            <Grid paddingTop={1} container >
+                <Grid item xs={12}>
+                    <FilmIdPathTitle film={film} descrition={castFilterTitle} />
+                </Grid>
+                <Grid item xs={12}>
+                    <Grid justifyContent='flex-end' container>
+                        <CastFIlter />
+                    </Grid>
+
+                </Grid>
+
             </Grid>
             <CastItems staff={localStaff} />
         </>

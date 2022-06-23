@@ -6,11 +6,12 @@ import { EGetTopOfFilms } from '../Interfaces/enums/enums';
 import { IFiltres } from '../models/filtres';
 import { $currentPageOfFilms } from '../models/currentPageOfFilms';
 
+const apikey = String(process.env.APIKEY)
 export const instanse = axios.create({
     baseURL: 'https://kinopoiskapiunofficial.tech/',
     headers: {
 
-        'X-API-KEY': 'a62624d0-c0d2-4bdd-b785-410e82901881',
+        'X-API-KEY': apikey,
         'Content-Type': 'application/json'
     }
 })
@@ -41,7 +42,8 @@ export const getFilmsApi = async (filtres: IFiltres | null, currentPage: number)
     let yearFrom = isNaN(Number(filtres?.yearFrom)) ? '' : `&yearFrom=${filtres?.yearFrom}`
     let yearTo = isNaN(Number(filtres?.yearTo)) ? '' : `&yearTo=${filtres?.yearTo}`
     let keyword = filtres?.keyWord ? `&keyword=${encodeURI(filtres.keyWord)}` : ''
-    let url = base += type += genres += countries += ratingFrom += ratingTo += yearFrom += yearTo += keyword
+    let order = filtres?.order ? `&order=${filtres.order}` : ''
+    let url = base += type += genres += countries += ratingFrom += ratingTo += yearFrom += yearTo += keyword += order
 
     let resp = await instanse.get(url)
     const data: IFilms = resp.data

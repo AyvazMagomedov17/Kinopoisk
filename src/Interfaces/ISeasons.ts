@@ -1,14 +1,14 @@
 export interface ISeasons {
     total: number,
-    items: [
-        number: number,
-        episodes: IEpisodes[]
-
-
-    ]
+    items: IEpisode[]
 
 }
-interface IEpisodes {
+export interface IEpisode {
+    number: number
+    episodes: IOneEpisode[]
+
+}
+export interface IOneEpisode {
     seasonNumber: number
     episodeNumber: number
     nameRu: string | null
