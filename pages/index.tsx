@@ -8,7 +8,7 @@ import Router from "next/router";
 type Props = {}
 
 
-const index = ({ }: Props) => {
+const Index = ({ }: Props) => {
     useEffect(() => {
         Router.replace('/films/tops')
     }, [])
@@ -25,4 +25,4 @@ const index = ({ }: Props) => {
     )
 }
 
-export default index
+export default Index
