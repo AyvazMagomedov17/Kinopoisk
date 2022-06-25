@@ -1,15 +1,14 @@
-import { AppBar, Box, Button, FilledInput, Grid, Input, InputLabel, Toolbar } from "@mui/material"
+import { AppBar, Button, FilledInput, Grid, Input, InputLabel, Toolbar } from "@mui/material"
 import { Container } from "@mui/system"
 import { useStore } from "effector-react"
 import { Formik } from "formik"
 
-import Router, { useRouter } from "next/router"
+import { useRouter } from "next/router"
 import { useState } from "react"
 import { $currentPageOfFilms } from "../../../models/currentPageOfFilms"
 import s from '../../../styles/header.module.css'
 import MenuDrawer from "./MenuDrawer"
 import MenuIcon from '@mui/icons-material/Menu';
-import { changeCategoriesEv, changeFilterEv } from "../../../models/tabs"
 import { useMaxWidthQuery } from "../../../hooks/mediaQuery"
 import SearchIcon from '@mui/icons-material/Search';
 import FilterSelectsDrawer from "../FilterSelectsDrawer"
@@ -29,8 +28,7 @@ const Header = ({ genresCountriesList }: Props) => {
     const router = useRouter()
     const currentPage = useStore($currentPageOfFilms)
     const handleClickOnLogo = () => {
-        changeFilterEv(0)
-        changeCategoriesEv(0)
+
         setTimeout(() => {
             router.push('/films/tops')
         }, 10);
