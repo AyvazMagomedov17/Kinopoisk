@@ -2,7 +2,6 @@ import { EImageType } from './../Interfaces/enums/EImageType';
 import { EReviewsSortType } from './../Interfaces/enums/EReviewsSortType';
 import { IFacts } from './../Interfaces/IFacts';
 import { ISimilars } from './../Interfaces/ISimilars';
-import { EProfessionKey } from './../Interfaces/enums/EProfessionKey';
 import { IAwards } from './../Interfaces/IAwards';
 import { IBoxOffice } from './../Interfaces/IBoxOffice';
 import { ISeasons } from './../Interfaces/ISeasons';
@@ -10,8 +9,7 @@ import { IStaff } from './../Interfaces/IStaff';
 import { IFilm } from './../Interfaces/IFilm';
 import { createEffect, createStore, createEvent } from "effector-next";
 import { filmApi } from '../api/filmApi';
-import { attach, combine, sample } from 'effector'
-import { $castFilter, setCastFilterEv, setIsOnCastPage } from './castFilter';
+import { attach, combine } from 'effector'
 import { IReviews } from '../Interfaces/IReviews';
 import { IImages } from '../Interfaces/IImages';
 
@@ -126,7 +124,7 @@ export const $imagesFilter = createStore<EImageType>(EImageType.STILL)
     .on(setImagesFilter, (_, payload) => payload)
     .reset(resetImagesFiltres)
 export const $combinedImagesFilter = combine({ $imagesPage, $imagesFilter, $filmId })
-export const $mainFilm = combine({ $film, $staff, $awards, $similarsFilms, $factsAboutFilm, $reviews, $images })
+export const $mainFilm = combine({ $film, $staff, $awards, $similarsFilms, $factsAboutFilm, $reviews, $images, $seasons, $boxOffice })
 export interface IMainFilm {
     $film: IFilm
     $staff: IStaff
@@ -135,6 +133,8 @@ export interface IMainFilm {
     $factsAboutFilm: IFacts
     $reviews: IReviews
     $images: IImages
+    $seasons: ISeasons
+    $boxOffice: IBoxOffice
 }
 
 

@@ -49,6 +49,7 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
+
 /* Упрощаем работу с изображениями */
 img {
   max-width: 100%;

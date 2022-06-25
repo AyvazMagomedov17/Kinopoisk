@@ -8,8 +8,8 @@ import { IAwards } from './../Interfaces/IAwards';
 import { IBoxOffice } from './../Interfaces/IBoxOffice';
 import { IStaff } from './../Interfaces/IStaff';
 import { IFilm } from "../Interfaces/IFilm"
-import { instanse } from "./api"
 import { ISeasons } from '../Interfaces/ISeasons';
+import { instanse } from './instanse';
 
 export const filmApi = {
     getFilm: async (filmId: number) => {

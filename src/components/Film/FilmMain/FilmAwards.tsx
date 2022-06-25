@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import FilmMainLink from "./FilmMainLink";
+import { useMaxWidthQuery } from "../../../hooks/mediaQuery";
 
 
 type Props = {
@@ -16,6 +17,7 @@ type PopupAwardItemsType = {
     color: string
 }
 const PopupAwardItem = ({ awards, color, title }: PopupAwardItemsType) => {
+    const _468px = useMaxWidthQuery(468)
     const router = useRouter()
     return <Box paddingBottom={2} paddingTop={2}>
         <Grid color={color} container>
@@ -26,7 +28,7 @@ const PopupAwardItem = ({ awards, color, title }: PopupAwardItemsType) => {
             <Grid item xs={3}><Typography fontWeight={600} color='rgba(44, 4, 108, 1)' fontSize={15}>{awards[0].year}</Typography></Grid>
             <Grid item xs={9}>{awards.map(item => {
                 return <>
-                    <Typography fontSize={17}>{item.nominationName}</Typography>
+                    <Typography fontSize={_468px ? 15 : 17}>{item.nominationName}</Typography>
                     <FilmMainLink>
                         {item.persons[0] ? <Link href={'/name/' + item.persons[0].kinopoiskId}>
                             <Typography fontSize={12}><>({item.persons[0].nameRu || item.persons[0].nameEn})</></Typography>
@@ -46,7 +48,9 @@ const FilmAwards = ({ awards }: Props) => {
     const [isOscarNomination, setisOscarNomination] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [awardImg, setAwardImgPath] = useState<undefined | string>(isOscarWin ? 'https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/09035193-2458-4de7-a7df-ad8f85b73798/orig' : isOscarNomination ? 'https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/931b548b-45a0-45ad-8127-148c423f850a/orig' : undefined)
-
+    const _700px = useMaxWidthQuery(700)
+    const _900px = useMaxWidthQuery(900)
+    const _468px = useMaxWidthQuery(468)
     const oscarsWin: IAward[] = []
     const oscarsNomination: IAward[] = []
     useEffect(() => {
@@ -84,13 +88,12 @@ const FilmAwards = ({ awards }: Props) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        maxWidth: 700,
+        width: _700px ? '90vw' : _900px ? '70vw' : '60vw',
         bgcolor: 'background.paper',
-
         boxShadow: 24,
         p: 4,
         borderRadius: '20px',
-        maxHeight: '600px',
+        maxHeight: '90vh',
         overflow: 'auto'
 
 
@@ -115,12 +118,12 @@ const FilmAwards = ({ awards }: Props) => {
                         timeout: 1000,
                     }} open={isModalOpen} onClose={handleClose}>
                     <Box sx={modalStyle}>
-                        <Box sx={{ 'display': 'flex', 'justifyContent': 'center' }}>
+                        <Box sx={{ 'display': 'flex', 'justifyContent': 'center', }}>
                             <Box >
                                 <Typography sx={{ 'cursor': 'pointer' }} variant='h5'>Оскар</Typography>
                                 <FilmMainLink color="rgba(7, 7, 7, 1)">
                                     <Link href={router.asPath + '/' + 'awards'}>
-                                        <Typography display='block' sx={{ cursor: 'pointer', 'justifySelf': 'flex-start', 'position': 'absolute', 'right': '20px', 'top': '10px' }}>Показать все награды...</Typography>
+                                        <Typography display='block' >Показать все награды...</Typography>
                                     </Link>
                                 </FilmMainLink>
 

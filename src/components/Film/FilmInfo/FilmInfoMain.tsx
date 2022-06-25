@@ -18,11 +18,11 @@ type Props = {
     similars: ISimilars
     facts: IFacts
     reviews: IReviews
+    seasons: ISeasons
 
 }
 
-const FilmInfoMain = ({ film, similars, facts, reviews }: Props) => {
-    const seasons = useStore($seasons)
+const FilmInfoMain = ({ film, similars, facts, reviews, seasons }: Props) => {
 
     return (
         <>

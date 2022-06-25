@@ -20,13 +20,13 @@ const CastItem = ({ description, nameEn, nameRu, posterUrl, professionKey, profe
     }
     return (
         <Card onClick={handleClick} sx={{ 'maxWidth': '800px', 'marginBottom': 2, minHeight: '140px', 'boxShadow': 'none', 'borderRadius ': '20px', 'borderTop': '1px solid gray', 'borderBottom': '1px solid gray' }}>
-            <CardActionArea>
+            <CardActionArea sx={{ 'maxWidth': '800px', minHeight: '140px', }}>
                 <Grid sx={{ 'padding': '10px 0 10px 30px' }} columnGap={1} container >
                     <Grid item xs={12}>
                         <Grid container>
                             <Grid item xs={_500px ? 4 : _900px ? 3 : 2} >
 
-                                <img style={{ 'borderRadius': '10px', 'objectFit': 'contain', 'height': _425px ? '100px' : '140px' }} src={posterUrl} alt="" />
+                                <img style={{ 'borderRadius': '10px', 'objectFit': 'contain', 'height': _425px ? '100px' : '120px' }} src={posterUrl} alt="" />
                             </Grid>
                             <Grid item xs={7}>
                                 <Typography fontWeight={600} fontSize={17} sx={{ 'paddingTop': '3%', 'paddingBottom': '1%' }}>{nameRu || nameEn}</Typography>

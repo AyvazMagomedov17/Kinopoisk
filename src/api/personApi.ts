@@ -1,6 +1,6 @@
 import { IPersons } from './../Interfaces/IPersons';
 import { IPerson } from './../Interfaces/IPerson';
-import { instanse } from './api';
+import { instanse } from './instanse';
 export const personApi = {
     getPerson: async (personId: number) => {
         const resp = await instanse.get(`api/v1/staff/${personId}`)

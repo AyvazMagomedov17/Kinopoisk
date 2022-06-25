@@ -5,12 +5,14 @@
     position: sticky;
     top:0;
     left: 0;
-    z-index: 100;
+    z-index: 10000;
      
     width: 100vw;
   }
   
   .progressValue {
+    z-index: 10000;
+
     animation: load 3s normal forwards;
     box-shadow: 0 10px 40px -10px #fff;
     border-radius: 100px;

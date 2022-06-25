@@ -12,15 +12,20 @@ import { useMaxWidth900, useMaxWidthQuery } from '../../../hooks/mediaQuery';
 import FilmAwards from './FilmAwards';
 import FilmMainActors from './FilmMainActors';
 import FilmMainBoxOffice from './FilmMainBoxOffice';
+import { IBoxOffice } from '../../../Interfaces/IBoxOffice';
+import { ISeasons } from '../../../Interfaces/ISeasons';
+import BackButton from '../../common/BackButton';
 
 type Props = {
     film: IFilm
     staff: IStaff,
     awards: IAwards
+    boxOffice: IBoxOffice
+    seasons: ISeasons
 
 }
 
-const FilmMain = ({ film, staff, awards }: Props) => {
+const FilmMain = ({ film, staff, awards, boxOffice, seasons }: Props) => {
     const router = useRouter()
     const backroundColor = 'black'
     const boxShadow = film.coverUrl ? 'inset 0 0 0 200vw rgba(0,0,0, 0.8)' : 'none'
@@ -62,16 +67,19 @@ const FilmMain = ({ film, staff, awards }: Props) => {
 
         <Box sx={styles.container}>
             <Box sx={styles.backround}>
-                <Container sx={{ paddingTop: 10 }} fixed>
+                <Container sx={{ paddingTop: 8, position: 'relative' }} fixed>
                     <Grid justifyContent='center' color={colorOfText} container>
+                        <Grid paddingBottom={3} item xs={12}>
+                            <BackButton white />
+                        </Grid>
                         <Grid xs={_900px ? 12 : 3} item>
                             <FilmMainLeft staff={staff} awards={awards} film={film} />
                         </Grid>
                         <Grid xs={_900px ? 12 : 6} item>
-                            <FilmMainCenter staff={staff} film={film} />
+                            <FilmMainCenter seasons={seasons} staff={staff} film={film} />
                         </Grid>
                         <Grid xs={_900px ? 12 : 3} item>
-                            {!_900px && <FilmMainRight film={film} />}
+                            {!_900px && <FilmMainRight boxOffice={boxOffice} film={film} />}
                             {_900px ?
                                 <Grid justifyContent='center' container>
                                     <Grid item xs={4}>
@@ -81,7 +89,7 @@ const FilmMain = ({ film, staff, awards }: Props) => {
                                         <FilmMainActors staff={staff} />
                                     </Grid>
                                     <Grid item xs={_420px ? 9 : _600px ? 8 : 4}>
-                                        <FilmMainBoxOffice />
+                                        <FilmMainBoxOffice boxOffice={boxOffice} />
                                     </Grid>
                                 </Grid> : null}
                         </Grid>

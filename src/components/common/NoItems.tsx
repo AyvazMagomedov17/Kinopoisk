@@ -11,10 +11,10 @@ const NoItems = ({ text }: Props) => {
         Router.back()
     }
     return (
-        <Grid justifyContent='center' container >
+        <Grid marginTop={20} justifyContent='center' container >
             <Grid item xs={12}>
                 <Grid marginBottom={4} justifyContent='center' container>
-                    <Typography textAlign='center' variant='h3' component='span'>{text} нет</Typography>
+                    <Typography textAlign='center' variant='h4' component='span'>{text} нет</Typography>
                 </Grid>
                 <Grid justifyContent='center' container>
                     <Button onClick={handleClick} sx={{ 'width': '300px', 'height': '50px', 'borderRadius': '15px' }} color='secondary' variant='contained'>Вернуться назад</Button>

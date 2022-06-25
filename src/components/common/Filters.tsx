@@ -4,6 +4,7 @@ import Router, { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { $tabs, changeFilterEv } from '../../models/tabs'
 import { SERIES } from '../../paths/common'
+import { COUNTRIES, GENRES, TOPS } from '../../paths/filmsPahts'
 
 type Props = {
 
@@ -15,9 +16,11 @@ type Props = {
 const Filters = ({ baseUrl }: Props) => {
     const filtres = useStore($tabs).filtres
     const router = useRouter().pathname
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        changeFilterEv(newValue)
-    };
+
+    const src = useRouter().query.src
+    useEffect(() => {
+        changeFilterEv(String(src))
+    }, [src])
 
 
 
@@ -39,10 +42,10 @@ const Filters = ({ baseUrl }: Props) => {
 
 
     return (
-        <Tabs sx={{ borderBottom: 1, borderColor: 'gray' }} value={filtres} onChange={handleChange}>
-            {baseUrl !== SERIES && < Tab onClick={handleClickOnTops} iconPosition='start' label='Подборки' />}
-            <Tab onClick={handleClickOnGenres} iconPosition='start' label='Жанры' />
-            <Tab onClick={handleClickOnCountries} iconPosition='start' label='Страны' />
+        <Tabs sx={{ borderBottom: 1, borderColor: 'gray' }} value={filtres}>
+            {baseUrl !== SERIES && < Tab value={TOPS} onClick={handleClickOnTops} iconPosition='start' label='Подборки' />}
+            <Tab value={GENRES} onClick={handleClickOnGenres} iconPosition='start' label='Жанры' />
+            <Tab value={COUNTRIES} onClick={handleClickOnCountries} iconPosition='start' label='Страны' />
         </Tabs>
     )
 }

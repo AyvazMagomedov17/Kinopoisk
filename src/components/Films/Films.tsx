@@ -1,19 +1,22 @@
-import { useEvent, useStore } from "effector-react"
+import { useStore } from "effector-react"
 import { useRouter } from "next/router"
 import { IFilms } from "../../Interfaces/IFilms"
 import { $currentPageOfFilms, setCurrentPageOfFilms } from "../../models/currentPageOfFilms"
 import CardFilm from "../CardsFilms/CardFilm/CardFilm"
 import ListOfFilms from "../common/ListOfFilms"
 import { EType } from '../../Interfaces/enums/enums'
-import { $filtres } from "../../models/filtres"
 import { useEffect } from "react"
+import { IGenresCountriesList } from "../../Interfaces/IGenresCountriesList"
+import NoItems from "../common/NoItems"
 
 
 type Props = {
     films: IFilms
+    genresCountriesList: IGenresCountriesList
+
 }
 
-const Films = ({ films }: Props) => {
+const Films = ({ films, genresCountriesList }: Props) => {
     const currentPage = useStore($currentPageOfFilms)
 
 
@@ -33,7 +36,7 @@ const Films = ({ films }: Props) => {
         router.replace(router.query.page ? asPath.replace(`page=${page}`, `page=${payload}`) : asPath + `?page=${payload}`)
     }
     return (
-        <ListOfFilms title={title} pagesCount={films.totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}>{arr}</ListOfFilms>
+        <ListOfFilms genresCountriesList={genresCountriesList} title={title} pagesCount={films.totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}>{films.total ? arr : <NoItems text="Фильмов с заданными фильтрами" />}</ListOfFilms>
     )
 }
 

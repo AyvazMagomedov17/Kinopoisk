@@ -2,6 +2,7 @@ import { Container, Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useMaxWidthQuery } from '../../hooks/mediaQuery'
 import { IPerson } from '../../Interfaces/IPerson'
+import BackButton from '../common/BackButton'
 import FactItemName from './FactItemName'
 import FilmsName from './FilmsName/FilmsName'
 import LeftName from './LeftName'
@@ -23,8 +24,12 @@ const Name = ({ person }: Props) => {
     }
     return (
         <Box sx={backgroundStyle}>
-            <Container sx={{ 'paddingTop': '100px' }} fixed>
+            <Container sx={{ 'paddingTop': '50px' }} fixed>
+                <Grid sx={{ 'paddingBottom': '30px' }} item xs={12}>
+                    <BackButton white />
+                </Grid>
                 <Grid justifyContent='center' container>
+
                     <Grid marginBottom={2} item xs={_900px ? 12 : 4}>
                         <Grid justifyContent='center' container>
                             <LeftName img={person?.posterUrl} />

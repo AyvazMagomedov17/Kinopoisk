@@ -1,10 +1,10 @@
+import { filmsApi } from './../api/filmsApi';
 import { IFilms } from './../Interfaces/IFilms';
 import { createEffect, createEvent, createStore, } from "effector-next";
-import { $filtres, IFiltres } from './filtres';
-import { getFilmsApi } from '../api/api';
+import { IFiltres } from './filtres';
 
 export const getFilmsEf = createEffect(async ({ page, filtres }: { page: number, filtres: IFiltres | null }) => {
-    const data = await getFilmsApi(filtres, page)
+    const data = await filmsApi.getFilms(filtres, page)
     return data
 
 })

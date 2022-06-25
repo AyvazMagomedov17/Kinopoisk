@@ -14,26 +14,12 @@ type Props = {
 
 const Film = ({ film }: Props) => {
 
-    const id = useStore($filmId)
-    const query = useRouter().query
-
-
-    useEffect(() => {
-        resetfilm()
-        if (film.$film.type === EType.TV_SERIES || film.$film.type === EType.MINI_SERIES) {
-            getSeasonsAt('')
-        }
-        if (film.$film.type === EType.FILM) {
-            getBoxOfficeAt('')
-        }
-
-    }, [id])
 
     return (
         <>
 
-            <FilmMain awards={film.$awards} film={film.$film} staff={film.$staff} />
-            <FilmInfo reviews={film.$reviews} facts={film.$factsAboutFilm} similars={film.$similarsFilms} film={film.$film} />
+            <FilmMain seasons={film.$seasons} boxOffice={film.$boxOffice} awards={film.$awards} film={film.$film} staff={film.$staff} />
+            <FilmInfo seasons={film.$seasons} reviews={film.$reviews} facts={film.$factsAboutFilm} similars={film.$similarsFilms} film={film.$film} />
         </>
 
     )

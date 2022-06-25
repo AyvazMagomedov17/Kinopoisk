@@ -18,8 +18,7 @@ const MenuDrawer = ({ isOpen, closeDrawer }: Props) => {
     return (
         <Drawer transitionDuration={500} open={isOpen} anchor="right" onClose={closeDrawer}>
             <Box sx={{ 'width': _430px ? '80vw' : _545px ? '60vw' : _710px ? '50vw' : '40vw', 'height': '100vh', 'backgroundColor': 'rgba(14, 4, 34, 1)', 'position': 'relative', }}>
-
-
+                <button onClick={closeDrawer} style={{ 'position': 'absolute', 'top': '20px', 'right': '20px', 'color': 'white', 'fontSize': 25 }}>✖</button>
 
                 <Grid flexDirection='column' paddingTop={20} container alignItems='center' >
 

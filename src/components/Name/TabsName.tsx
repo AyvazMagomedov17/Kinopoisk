@@ -11,6 +11,9 @@ type Props = {
     sex: ESex | undefined | null
 }
 
+const color = {
+    color: 'white'
+}
 const TabsName = ({ films, sex }: Props) => {
     const handleChangeTabs = (event: any, payload: EExtendedProffesionKey) => {
         changeFilmsNameTabsEv(payload)
@@ -24,58 +27,68 @@ const TabsName = ({ films, sex }: Props) => {
     const himselfTab = films?.filter(film => film.professionKey === EExtendedProffesionKey.HIMSELF || film.professionKey === EExtendedProffesionKey.HERSELF)
     const hronoTitrTab = films?.filter(film => film.professionKey === EExtendedProffesionKey.HRONO_TITR_MALE || film.professionKey === EExtendedProffesionKey.HRONO_TITR_FEMALE)
     return (
-        <Tabs variant="scrollable"
-            onChange={handleChangeTabs} value={tabs} indicatorColor='secondary' textColor='secondary'>
-            {actorTab?.length ?
+        <>
+            <Tabs variant="scrollable"
+                onChange={handleChangeTabs} value={tabs} indicatorColor='secondary' >
+                {actorTab?.length ?
 
 
-                <Tab value={EExtendedProffesionKey.ACTOR} label={
+                    <Tab value={EExtendedProffesionKey.ACTOR} label={
+                        <>
+                            <Typography sx={color} >Актер</Typography>
+                            <Typography sx={color} textAlign='start' fontSize={9}>{actorTab?.length} фил.</Typography>
+                        </>
+                    } />
+
+                    : null
+                }
+                {directorTab?.length ? <Tab value={EExtendedProffesionKey.DIRECTOR} label={
                     <>
-                        <Typography>Актер</Typography>
-                        <Typography textAlign='start' fontSize={9}>{actorTab?.length} фил.</Typography>
+                        <Typography sx={color}>Режиссер</Typography>
+                        <Typography sx={color} textAlign='start' fontSize={9}>{directorTab.length} фил.</Typography>
                     </>
                 } />
+                    : null}
+                {producerTab?.length ? <Tab value={EExtendedProffesionKey.PRODUCER} label={
+                    <>
+                        <Typography sx={color}>Продюссер</Typography>
+                        <Typography sx={color} textAlign='start' fontSize={9}>{producerTab.length} фил.</Typography>
+                    </>
+                } /> : null}
+                {writerTab?.length ? <Tab value={EExtendedProffesionKey.WRITER} label={
+                    <>
+                        <Typography sx={color}>Сценарист</Typography>
+                        <Typography sx={color} textAlign='start' fontSize={9}>{writerTab.length} фил.</Typography>
+                    </>
+                } /> : null}
+                {editorTab?.length ? <Tab value={EExtendedProffesionKey.EDITOR} label={
+                    <>
+                        <Typography sx={color}>Редактор</Typography>
+                        <Typography sx={color} textAlign='start' fontSize={9}>{editorTab.length} фил.</Typography>
+                    </>
+                } /> : null}
+                {himselfTab?.length ? <Tab value={sex === ESex.MALE ? EExtendedProffesionKey.HIMSELF : EExtendedProffesionKey.HERSELF} label={
+                    <>
+                        <Typography sx={color}>Актер: играет самого себя</Typography>
+                        <Typography sx={color} textAlign='start' fontSize={9}>{himselfTab.length} фил.</Typography>
+                    </>
+                } /> : null}
+                {hronoTitrTab?.length ? <Tab value={sex === ESex.MALE ? EExtendedProffesionKey.HRONO_TITR_MALE : EExtendedProffesionKey.HRONO_TITR_FEMALE} label={
+                    <>
+                        <Typography sx={color}>Актер: Хроника, В титрах не указан</Typography>
+                        <Typography sx={color} textAlign='start' fontSize={9}>{hronoTitrTab.length} фил.</Typography>
+                    </>
+                } /> : null}
+            </Tabs >
+            <style jsx>
+                {`
+                .text{
+                    color: white;
+                }
+                `}
+            </style>
+        </>
 
-                : null
-            }
-            {directorTab?.length ? <Tab value={EExtendedProffesionKey.DIRECTOR} label={
-                <>
-                    <Typography>Режиссер</Typography>
-                    <Typography textAlign='start' fontSize={9}>{directorTab.length} фил.</Typography>
-                </>
-            } />
-                : null}
-            {producerTab?.length ? <Tab value={EExtendedProffesionKey.PRODUCER} label={
-                <>
-                    <Typography>Продюссер</Typography>
-                    <Typography textAlign='start' fontSize={9}>{producerTab.length} фил.</Typography>
-                </>
-            } /> : null}
-            {writerTab?.length ? <Tab value={EExtendedProffesionKey.WRITER} label={
-                <>
-                    <Typography>Сценарист</Typography>
-                    <Typography textAlign='start' fontSize={9}>{writerTab.length} фил.</Typography>
-                </>
-            } /> : null}
-            {editorTab?.length ? <Tab value={EExtendedProffesionKey.EDITOR} label={
-                <>
-                    <Typography>Редактор</Typography>
-                    <Typography textAlign='start' fontSize={9}>{editorTab.length} фил.</Typography>
-                </>
-            } /> : null}
-            {himselfTab?.length ? <Tab value={sex === ESex.MALE ? EExtendedProffesionKey.HIMSELF : EExtendedProffesionKey.HERSELF} label={
-                <>
-                    <Typography>Актер: играет самого себя</Typography>
-                    <Typography textAlign='start' fontSize={9}>{himselfTab.length} фил.</Typography>
-                </>
-            } /> : null}
-            {hronoTitrTab?.length ? <Tab value={sex === ESex.MALE ? EExtendedProffesionKey.HRONO_TITR_MALE : EExtendedProffesionKey.HRONO_TITR_FEMALE} label={
-                <>
-                    <Typography>Актер: Хроника, В титрах не указан</Typography>
-                    <Typography textAlign='start' fontSize={9}>{hronoTitrTab.length} фил.</Typography>
-                </>
-            } /> : null}
-        </Tabs >
     )
 }
 

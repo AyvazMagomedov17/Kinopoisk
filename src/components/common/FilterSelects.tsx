@@ -1,22 +1,24 @@
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Slider, TextField, Typography } from "@mui/material";
 import { useStore } from "effector-react";
 import { Formik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
 import { EFilmsOrder } from "../../Interfaces/enums/EFilmsOrder";
 import { EType } from "../../Interfaces/enums/enums";
-import { setCastFilterEv, setIsOnCastPage } from "../../models/castFilter";
+import { IGenresCountriesList } from "../../Interfaces/IGenresCountriesList";
 import { $currentPageOfFilms } from "../../models/currentPageOfFilms";
-import { $filtres, setFiltresEv } from "../../models/filtres";
+import { $filtres } from "../../models/filtres";
 import { $genresCountriesList } from "../../models/genresCountriesList";
 
-type Props = {}
+type Props = {
+    genresCountriesList: IGenresCountriesList
 
-const FilterSelects = (props: Props) => {
-    const genresAndCountries = useStore($genresCountriesList)
+}
+
+const FilterSelects = ({ genresCountriesList }: Props) => {
+
     const filter = useStore($filtres)
     const router = useRouter()
-    const currentPage = useStore($currentPageOfFilms)
     const genres = Number(router.query.genres)
     const countries = Number(router.query.countries)
     const type = router.query.type
@@ -26,16 +28,16 @@ const FilterSelects = (props: Props) => {
     const yearTo = Number(router.query.yearTo)
     const keyWord = router.query.keyword ? router.query.keyword : ''
     const order = router.query.order ? router.query.order : EFilmsOrder.RATING
-
+    console.log(isNaN(countries))
     function valuetext(value: number) {
         return `${value}°C`;
     }
     return (
         <>
-            <Formik initialValues={
+            <Formik enableReinitialize initialValues={
                 {
-                    genres: genres || filter.genres,
-                    countries: countries || filter.countries,
+                    genres: isNaN(genres) ? undefined : genres,
+                    countries: isNaN(countries) ? undefined : countries,
                     type: type || filter.type,
                     ratingFrom: ratingFrom || filter.ratingFrom,
                     ratingTo: ratingTo || filter.ratingTo,
@@ -45,7 +47,13 @@ const FilterSelects = (props: Props) => {
                     order: order
                 }
             } onSubmit={(filtres) => {
-                router.replace(`movies?page=${1}&countries=${filtres.countries}&genres=${filtres.genres}&type=${filtres.type}&ratingFrom=${filtres.ratingFrom}&ratingTo=${filtres.ratingTo}&yearFrom=${filtres.yearFrom}&yearTo=${filtres.yearTo}&keyword=${filtres.keyWord}&order=${filtres.order}`)
+                if (filtres.keyWord && filtres.keyWord !== decodeURI(String(keyWord))) {
+
+                    router.push(`movies?page=${1}&type=${EType.ALL}&ratingFrom=${0}&ratingTo=${10}&yearFrom=${1000}&yearTo=${3000}&keyword=${filtres.keyWord}&order=${filtres.order}`)
+                } else {
+                    router.push(`movies?page=${1}&countries=${filtres.countries}&genres=${filtres.genres}&type=${filtres.type}&ratingFrom=${filtres.ratingFrom}&ratingTo=${filtres.ratingTo}&yearFrom=${filtres.yearFrom}&yearTo=${filtres.yearTo}&keyword=${filtres.keyWord}&order=${filtres.order}`)
+                }
+
             }}>
                 {({ values, handleChange, handleSubmit }) => (
                     <>
@@ -73,7 +81,7 @@ const FilterSelects = (props: Props) => {
                                     label="Жанр"
                                     onChange={handleChange}
                                 >
-                                    {genresAndCountries?.genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.genre}</MenuItem>)}
+                                    {genresCountriesList?.genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.genre}</MenuItem>)}
                                 </Select>
                             </FormControl>
                         </Box>
@@ -87,7 +95,7 @@ const FilterSelects = (props: Props) => {
                                     onChange={handleChange}
                                 >
 
-                                    {genresAndCountries?.countries.map(country => <MenuItem key={country.id} value={country.id}>{country.country}</MenuItem>)}
+                                    {genresCountriesList?.countries.map(country => <MenuItem key={country.id} value={country.id}>{country.country}</MenuItem>)}
                                 </Select>
                             </FormControl>
                         </Box>

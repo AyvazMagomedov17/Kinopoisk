@@ -57,13 +57,13 @@ const CardFilm = (props: Props) => {
                                     <Grid container>
                                         <Grid item xs={12}><Typography fontSize={_355px ? 14 : _510px ? 16 : 18}>{props.nameRu || props.nameEn || props.nameOriginal} </Typography></Grid>
                                         <Grid item xs={12}><Typography fontSize={_510px ? 12 : 13}>{props.nameEn || props.nameOriginal} {props.year} {props.filmLength ? props.filmLength + ' мин.' : type} </Typography></Grid>
-                                        <Grid sx={{ 'max-width': '400px', 'wordBreak': 'break-word' }} item xs={12}><Typography fontSize={13}>{!_900px ? props.countries.map((count) => <span key={count.country} style={{ 'fontSize': '13px', 'paddingRight': '5px' }} >{count.country}</span>) : <span style={{ 'fontSize': '13px', 'paddingRight': '5px' }}>{props.countries[0].country}</span>}{!_900px ? props.genres.map(genre => <span key={genre.genre} style={{ 'fontSize': '13px', 'paddingRight': '5px' }} >{genre.genre}</span>) : <span style={{ 'fontSize': '13px', 'paddingRight': '5px' }}>{props.genres[0].genre}</span>} </Typography></Grid>
+                                        <Grid sx={{ 'width': _355px ? '180px' : _510px ? '230px' : '400px', 'wordBreak': 'break-word' }} item xs={12}><Typography fontSize={13}>{!_900px ? props.countries.map((count) => <span key={count.country} style={{ 'fontSize': '13px', 'paddingRight': '5px' }} >{count.country}</span>) : <span style={{ 'fontSize': '13px', 'paddingRight': '5px' }}>{props.countries[0].country}</span>}{!_900px ? props.genres.map(genre => <span key={genre.genre} style={{ 'fontSize': '13px', 'paddingRight': '5px' }} >{genre.genre}</span>) : <span style={{ 'fontSize': '13px', 'paddingRight': '5px' }}>{props.genres[0].genre}</span>} </Typography></Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={_510px ? 2 : _553px ? 6 : 5}>
                                     <Grid container sx={{ 'paddingLeft': _553px ? '30px' : '70px' }} >
                                         {_510px ? <>
-                                            <Grid item xs={12}>
+                                            <Grid justifyContent='flex-end' item xs={12}>
                                                 <Typography fontSize={18} color='green' display='inline'>
                                                     {props.rating || props.ratingKinopoisk || props.ratingImdb}
                                                 </Typography>

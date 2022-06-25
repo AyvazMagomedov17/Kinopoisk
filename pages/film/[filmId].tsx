@@ -6,7 +6,7 @@ import Preloader from '../../src/components/common/Preloader'
 import Film from '../../src/components/Film/Film'
 import { IBoxOffice } from '../../src/Interfaces/IBoxOffice'
 import TitleLayout from '../../src/layouts/TitleLayout'
-import { $boxOffice, $filmId, $mainFilm, getAwardsAt, getBoxOfficeAt, getFactsAboutFilmAt, getFilmAt, getReviewsAt, getSimilarsAt, getStaffAt, IMainFilm, setFilmId } from '../../src/models/film'
+import { $boxOffice, $filmId, $mainFilm, getAwardsAt, getBoxOfficeAt, getFactsAboutFilmAt, getFilmAt, getReviewsAt, getSeasonsAt, getSimilarsAt, getStaffAt, IMainFilm, setFilmId } from '../../src/models/film'
 
 type Props = {
     film: IMainFilm,
@@ -53,6 +53,8 @@ export async function getServerSideProps({ query }: any) {
         await getSimilarsAt('')
         await getFactsAboutFilmAt('')
         await getReviewsAt(1)
+        await getSeasonsAt('')
+        await getBoxOfficeAt('')
         return {
             props: {
                 film: $mainFilm.getState(),

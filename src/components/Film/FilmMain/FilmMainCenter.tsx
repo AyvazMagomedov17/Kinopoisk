@@ -7,15 +7,15 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { useRouter } from "next/router"
 import { IStaff } from "../../../Interfaces/IStaff"
 import { EProfessionKey } from "../../../Interfaces/enums/EProfessionKey"
-import { useStore } from "effector-react"
-import { $seasons } from "../../../models/film"
 import Link from "next/link"
 import FilmMainLink from "./FilmMainLink"
 import { useMaxWidthQuery } from "../../../hooks/mediaQuery"
+import { ISeasons } from "../../../Interfaces/ISeasons"
 
 type film = {
     film: IFilm
     staff: IStaff
+    seasons: ISeasons
 }
 type ArrayOfInfofilmtype = {
     children: any,
@@ -36,12 +36,11 @@ const ArrayOfInfo = ({ children, link }: ArrayOfInfofilmtype) => {
 
     )
 }
-const FilmMainCenter = ({ film, staff }: film) => {
+const FilmMainCenter = ({ film, staff, seasons }: film) => {
     const _500px = useMaxWidthQuery(500)
     const _400px = useMaxWidthQuery(400)
     const _450px = useMaxWidthQuery(450)
     const _415px = useMaxWidthQuery(415)
-    const seasons = useStore($seasons)
     let staffInfo: Array<any> = []
     let directors: Array<any> = []
     let writers: Array<any> = []
@@ -79,9 +78,7 @@ const FilmMainCenter = ({ film, staff }: film) => {
     }
 
     const router = useRouter()
-    const handleClickOnOpenKinopoiskButton = () => {
-        router.push(film.webUrl)
-    }
+
     const grayColor = 'rgba(255,255,255,.6)'
     const countries = film.countries.map(country => <span key={country.country} style={{ 'marginRight': '9px' }}>{country.country}</span>)
     const genres: any[] = []
@@ -100,8 +97,8 @@ const FilmMainCenter = ({ film, staff }: film) => {
             <Grid className={s.paddingBottom} item xs={12}><Typography><span style={{ 'paddingRight': '7px' }}>{film.year} год</span>  {film.countries.map(country => <span key={country.country} style={{ 'paddingRight': '7px' }}>{country.country}</span>)}</Typography></Grid>
             <Grid className={s.paddingBottom} item xs={12}><Typography fontSize={18} >{film.genres[0].genre} {film.genres[1] && film.genres[1].genre}</Typography></Grid>
             <Grid marginBottom={2} className={s.paddingBottom} item xs={12}><Typography fontSize={18} >{film.shortDescription || film.slogan}</Typography></Grid>
-            <Grid className={s.paddingBottom} item xs={10}><Button startIcon={<PlayArrowIcon />} color='error' onClick={handleClickOnOpenKinopoiskButton} sx={{ borderRadius: 10, minHeight: '50px', marginBottom: '10px' }} fullWidth size='large' variant='outlined'><Typography fontSize={_415px ? 12 : _450px ? 13 : 15}>Открыть на кинопоиске</Typography></Button></Grid>
-            <Grid className={s.paddingBottom} item xs={10}><a target='__blank' href={`https://kirlovon.dev/Kinopoisk-Watch/?id=${film.kinopoiskId}`}><Button startIcon={<PlayArrowIcon />} color='success' sx={{ borderRadius: 10, minHeight: '50px', marginBottom: '50px' }} fullWidth size='large' variant='contained'><Typography fontSize={_415px ? 12 : _450px ? 13 : 15}>Смотреть бесплатно</Typography></Button></a></Grid>
+            <Grid className={s.paddingBottom} item xs={10}><a style={{ 'textDecoration': 'none' }} target='__blank' href={film.webUrl}><Button startIcon={<PlayArrowIcon />} color='error' sx={{ borderRadius: 10, minHeight: '50px', marginBottom: '10px' }} fullWidth size='large' variant='outlined'><Typography fontSize={_415px ? 12 : _450px ? 13 : 15}>Открыть на кинопоиске</Typography></Button>    </a></Grid>
+            <Grid className={s.paddingBottom} item xs={10}><a style={{ 'textDecoration': 'none' }} target='__blank' href={`https://kirlovon.dev/Kinopoisk-Watch/?id=${film.kinopoiskId}`}><Button startIcon={<PlayArrowIcon />} color='success' sx={{ borderRadius: 10, minHeight: '50px', marginBottom: '50px' }} fullWidth size='large' variant='contained'><Typography fontSize={_415px ? 12 : _450px ? 13 : 15}>Смотреть бесплатно</Typography></Button></a></Grid>
             <Grid marginBottom={3} item xs={12}><Typography fontWeight={600} variant='h4'>О фильме:</Typography></Grid>
             <FilmInfoItem title='Год производства' info={film.year} />
             <FilmInfoItem title='Страны' info={countries} />
@@ -109,7 +106,7 @@ const FilmMainCenter = ({ film, staff }: film) => {
             {film.filmLength && <FilmInfoItem title={filmLength} info={film.filmLength && film.filmLength + ' минут'} />}
             <FilmInfoItem title='Тип' info={type} />
             {film.ratingAgeLimits && <FilmInfoItem title="Возраст" info={film.ratingAgeLimits?.slice(3) + '+'} />}
-            {seasons && <FilmInfoItem title="Количество сезонов" info={seasons.total} />}
+            {seasons.total ? <FilmInfoItem title="Количество сезонов" info={seasons.total} /> : null}
             {film.slogan && <FilmInfoItem title='Слоган' info={film.slogan} />}
             {staffInfo}
 

@@ -16,7 +16,10 @@ const MenuDrawerItem = ({ Icon, link, text, closeDrawer }: Props) => {
     const router = useRouter()
     const handleClick = () => {
         closeDrawer()
-        router.push(link)
+        setTimeout(() => {
+            router.push(link)
+        }, 300);
+
     }
     return (
         <span onClick={handleClick}>

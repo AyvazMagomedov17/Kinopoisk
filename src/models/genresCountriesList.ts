@@ -1,11 +1,11 @@
 import { createEffect, createStore } from 'effector-next';
-import { gentresCountriesListApi } from '../api/api';
+import { genresCountriesListApi } from '../api/genresCountriesApi';
 import { IGenresCountriesList } from '../Interfaces/IGenresCountriesList';
 
 
-export const getGenrecCountriesListEf = createEffect(async () => {
-    const data = await gentresCountriesListApi()
+export const getGenresCountriesListEf = createEffect(async () => {
+    const data = await genresCountriesListApi()
     return data
 })
-export const $genresCountriesList = createStore<IGenresCountriesList | null>(null).on(getGenrecCountriesListEf.doneData, (_, data) => data)
+export const $genresCountriesList = createStore<IGenresCountriesList | null>(null).on(getGenresCountriesListEf.doneData, (_, data) => data)
 

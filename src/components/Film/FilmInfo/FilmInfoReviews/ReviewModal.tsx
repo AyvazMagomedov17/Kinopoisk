@@ -36,6 +36,7 @@ const ReviewModal = ({ isOpen, author, date, description, kinopoiskId, negativeR
     return (
         <Modal
             open={isOpen}
+            onClose={closeModal}
         >
             <Box sx={style}>
                 <Grid container>

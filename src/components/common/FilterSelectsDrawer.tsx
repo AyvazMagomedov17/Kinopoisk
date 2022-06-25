@@ -5,6 +5,8 @@ import { Formik } from "formik"
 import { useRouter } from "next/router"
 import { useMaxWidthQuery } from "../../hooks/mediaQuery"
 import { EFilmsOrder } from "../../Interfaces/enums/EFilmsOrder"
+import { EType } from "../../Interfaces/enums/enums"
+import { IGenresCountriesList } from "../../Interfaces/IGenresCountriesList"
 import { $currentPageOfFilms } from "../../models/currentPageOfFilms"
 import { $filtres } from "../../models/filtres"
 import { $genresCountriesList } from "../../models/genresCountriesList"
@@ -13,10 +15,13 @@ import FilterSelects from "./FilterSelects"
 type Props = {
     isOpen: boolean
     closeDrawer: () => void
+    genresCountriesList: IGenresCountriesList
+    isFromMovieList: boolean
+
 }
 
-const FilterSelectsDrawer = ({ isOpen, closeDrawer }: Props) => {
-    const genresAndCountries = useStore($genresCountriesList)
+const FilterSelectsDrawer = ({ isOpen, closeDrawer, genresCountriesList, isFromMovieList }: Props) => {
+
     const filter = useStore($filtres)
     const router = useRouter()
     const currentPage = useStore($currentPageOfFilms)
@@ -53,7 +58,22 @@ const FilterSelectsDrawer = ({ isOpen, closeDrawer }: Props) => {
                             order: order
                         }
                     } onSubmit={(filtres) => {
-                        router.replace(`movies?page=${1}&countries=${filtres.countries}&genres=${filtres.genres}&type=${filtres.type}&ratingFrom=${filtres.ratingFrom}&ratingTo=${filtres.ratingTo}&yearFrom=${filtres.yearFrom}&yearTo=${filtres.yearTo}&keyword=${filtres.keyWord}&order=${filtres.order}`)
+                        closeDrawer()
+                        setTimeout(() => {
+                            if (isFromMovieList) {
+                                if (filtres.keyWord && filtres.keyWord !== decodeURI(String(keyWord))) {
+
+                                    router.push(`movies?page=${1}&type=${EType.ALL}&ratingFrom=${0}&ratingTo=${10}&yearFrom=${1000}&yearTo=${3000}&keyword=${filtres.keyWord}&order=${filtres.order}`)
+                                } else {
+                                    router.push(`movies?page=${1}&countries=${filtres.countries}&genres=${filtres.genres}&type=${filtres.type}&ratingFrom=${filtres.ratingFrom}&ratingTo=${filtres.ratingTo}&yearFrom=${filtres.yearFrom}&yearTo=${filtres.yearTo}&keyword=${filtres.keyWord}&order=${filtres.order}`)
+                                }
+                            } else {
+
+                                router.push(`/movielist/movies?page=${1}&countries=${filtres.countries}&genres=${filtres.genres}&type=${filtres.type}&ratingFrom=${filtres.ratingFrom}&ratingTo=${filtres.ratingTo}&yearFrom=${filtres.yearFrom}&yearTo=${filtres.yearTo}&keyword=${filtres.keyWord}&order=${filtres.order}`)
+                            }
+                        }, 300);
+
+
                     }}>
                         {({ values, handleChange, handleSubmit }) => (
                             <>
@@ -62,7 +82,7 @@ const FilterSelectsDrawer = ({ isOpen, closeDrawer }: Props) => {
                                     <FormControl sx={{ 'marginBottom': '10px' }} fullWidth>
 
                                         <InputLabel >Сортировать по...</InputLabel>
-                                        <Select
+                                        <Select fullWidth
                                             name='order'
                                             value={values.order}
                                             label='Сортировать по...'
@@ -81,28 +101,28 @@ const FilterSelectsDrawer = ({ isOpen, closeDrawer }: Props) => {
                                             label="Жанр"
                                             onChange={handleChange}
                                         >
-                                            {genresAndCountries?.genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.genre}</MenuItem>)}
+                                            {genresCountriesList?.genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.genre}</MenuItem>)}
                                         </Select>
                                     </FormControl>
                                 </Box>
                                 <Box sx={{ maxWidth: 200, marginBottom: '10px' }}>
                                     <FormControl fullWidth>
                                         <InputLabel >Страна</InputLabel>
-                                        <Select
+                                        <Select fullWidth
                                             name='countries'
                                             value={values.countries}
                                             label="Страна"
                                             onChange={handleChange}
                                         >
 
-                                            {genresAndCountries?.countries.map(country => <MenuItem key={country.id} value={country.id}>{country.country}</MenuItem>)}
+                                            {genresCountriesList?.countries.map(country => <MenuItem key={country.id} value={country.id}>{country.country}</MenuItem>)}
                                         </Select>
                                     </FormControl>
                                 </Box>
                                 <Box sx={{ maxWidth: 200, marginBottom: '10px' }}>
                                     <FormControl fullWidth>
                                         <InputLabel >Тип</InputLabel>
-                                        <Select
+                                        <Select fullWidth
                                             name='type'
                                             value={values.type}
                                             label="Тип"
@@ -148,8 +168,8 @@ const FilterSelectsDrawer = ({ isOpen, closeDrawer }: Props) => {
                                         getAriaValueText={valuetext}
 
                                     />
-                                    <TextField sx={{ marginBottom: '10px' }} onChange={handleChange} name='yearFrom' label="Минимальный год" />
-                                    <TextField sx={{ marginBottom: '10px' }} onChange={handleChange} name='yearTo' label="Максимальный год" />
+                                    <TextField fullWidth sx={{ marginBottom: '10px' }} onChange={handleChange} name='yearFrom' label="Минимальный год" />
+                                    <TextField fullWidth sx={{ marginBottom: '10px' }} onChange={handleChange} name='yearTo' label="Максимальный год" />
                                     <Button fullWidth variant='contained' type="submit" onClick={() => handleSubmit()}>Поиск</Button>
                                 </Box>
 

@@ -2,6 +2,7 @@ import { useEvent, useStore } from "effector-react"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { EGetTopOfFilms } from "../../Interfaces/enums/enums"
+import { IGenresCountriesList } from "../../Interfaces/IGenresCountriesList"
 import { ITop } from "../../Interfaces/ITop"
 import { $currentPageOfFilms, setCurrentPageOfFilms } from "../../models/currentPageOfFilms"
 import CardFilm from "../CardsFilms/CardFilm/CardFilm"
@@ -10,9 +11,11 @@ import ListOfFilms from "../common/ListOfFilms"
 
 type Props = {
     films: ITop
+    genresCountriesList: IGenresCountriesList
+
 }
 
-const TopFilms = ({ films }: Props) => {
+const TopFilms = ({ films, genresCountriesList }: Props) => {
     const currentPage = useStore($currentPageOfFilms)
     const router = useRouter()
     const setCurrentPage = (payload: number) => {
@@ -31,7 +34,7 @@ const TopFilms = ({ films }: Props) => {
 
     return (
         <>
-            <ListOfFilms setCurrentPage={setCurrentPage} currentPage={currentPage} pagesCount={pagesCount} title={title}>{filmsArr}</ListOfFilms>
+            <ListOfFilms genresCountriesList={genresCountriesList} setCurrentPage={setCurrentPage} currentPage={currentPage} pagesCount={pagesCount} title={title}>{filmsArr}</ListOfFilms>
         </>
 
     )
