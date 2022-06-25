@@ -5,11 +5,14 @@ import { useEffect } from "react";
 import TitleLayout from "../src/layouts/TitleLayout";
 import Categories from "../src/components/Categories/Categories";
 import Router from "next/router";
-import { getGenrecCountriesListEf } from "../src/models/genresCountriesList";
-type Props = {}
+import { $genresCountriesList, getGenresCountriesListEf } from "../src/models/genresCountriesList";
+import { IGenresCountriesList } from "../src/Interfaces/IGenresCountriesList";
+type Props = {
+    genresCountriesList: IGenresCountriesList
+}
 
 
-const Index = ({ }: Props) => {
+const Index = ({ genresCountriesList }: Props) => {
     useEffect(() => {
         Router.replace('/films/tops')
 
@@ -18,7 +21,7 @@ const Index = ({ }: Props) => {
     return (
         <>
             <TitleLayout title='Фильмы'>
-                <Categories title='Фильмы' baseUrl='/films' />
+                <Categories genresCountriesList={genresCountriesList} title='Фильмы' baseUrl='/films' />
             </TitleLayout>
 
 
@@ -27,5 +30,12 @@ const Index = ({ }: Props) => {
 
     )
 }
-
+export async function getServerSideProps({ query }: any) {
+    await getGenresCountriesListEf()
+    return {
+        props: {
+            genresCountriesList: $genresCountriesList.getState()
+        }
+    }
+}
 export default Index
