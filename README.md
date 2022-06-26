@@ -30,7 +30,12 @@
 
 ## Команды
 
-
+####
+```sh
+npm i
+#or
+yarn 
+```
 ####
 ```sh
 nmp run dev
@@ -38,5 +43,5 @@ nmp run dev
 yarn dev
 ```
 ##### Для запуска проекта вам нужно зарегистрироваться [на этом сайте](https://kinopoiskapiunofficial.tech/) и получить ваш api-key. Затем создать в корневой папке проекта файл .env.local, в нем создать переменную APIKEY и после запятой вставить полученный на сайте ваш уникальный api-key
-![image](https://i.postimg.cc/d3JRBBcW/key.jpg)
+![image](https://i.postimg.cc/JhkYGPQv/nado.jpg)
 ![image](https://i.postimg.cc/6pyDX3Vz/env.jpg) 
