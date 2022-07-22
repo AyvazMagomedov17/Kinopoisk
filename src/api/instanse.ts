@@ -6,3 +6,10 @@ export const instanse = axios.create({
         'Content-Type': 'application/json'
     }
 })
+
+export const userInstanse = axios.create({
+    baseURL: 'https://kinopoiskapp.herokuapp.com/api/',
+    headers: {
+        Authorization: `Bearer ${typeof window !== 'undefined' ? localStorage.getItem('token') : ''}`
+    }
+})

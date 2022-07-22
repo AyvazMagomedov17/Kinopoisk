@@ -35,7 +35,7 @@ const ListOfFilms = ({ pagesCount, children, title, currentPage, setCurrentPage,
         <Grid container>
             <Header genresCountriesList={genresCountriesList} />
             <Container sx={{ 'paddingTop': '40px', 'paddingBottom': '40px', }} fixed>
-                <Grid gap={1} container>
+                <Grid gap={2} container>
                     <Grid item xs={12}><BackButton /></Grid>
                     <Grid container>
 

@@ -27,15 +27,41 @@ const FilmInfoTabs = (props: Props) => {
         <Tabs
             variant="scrollable"
             scrollButtons="auto" indicatorColor='secondary' textColor='secondary' value={tabs}>
-            <Tab label='Обзор' />
-            <Tab onClick={handleClickOnAwards} label='Награды' />
-            <Tab onClick={handleClickOnImages} label='Изображения' />
-            <Tab onClick={handleClickOnCast} label='Cоздатели' />
-            <Tab onClick={handleClickOnReviews} label='Рецензии' />
-
-
-
-
+            <Tab sx={{
+                'transition': 'all 0.3s',
+                '&:hover': {
+                    'transform': 'scale(1.1)',
+                    'transition': 'all 0.3s'
+                }
+            }} label='Обзор' />
+            <Tab sx={{
+                'transition': 'all 0.3s',
+                '&:hover': {
+                    'transform': 'scale(1.1)',
+                    'transition': 'all 0.3s'
+                }
+            }} onClick={handleClickOnAwards} label='Награды' />
+            <Tab sx={{
+                'transition': 'all 0.3s',
+                '&:hover': {
+                    'transform': 'scale(1.1)',
+                    'transition': 'all 0.3s'
+                }
+            }} onClick={handleClickOnImages} label='Изображения' />
+            <Tab sx={{
+                'transition': 'all 0.3s',
+                '&:hover': {
+                    'transform': 'scale(1.1)',
+                    'transition': 'all 0.3s'
+                }
+            }} onClick={handleClickOnCast} label='Cоздатели' />
+            <Tab sx={{
+                'transition': 'all 0.3s',
+                '&:hover': {
+                    'transform': 'scale(1.1)',
+                    'transition': 'all 0.3s'
+                }
+            }} onClick={handleClickOnReviews} label='Рецензии' />
         </Tabs>
     )
 }

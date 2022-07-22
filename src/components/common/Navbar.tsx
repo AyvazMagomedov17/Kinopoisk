@@ -48,9 +48,27 @@ const Navbar = ({ }: Props) => {
             <div className={s.content}>
                 <nav className={s.menu}>
                     <Tabs sx={{ borderRight: 1, borderColor: 'gray' }} orientation='vertical' value={tabs.categories} aria-label="icon position tabs example">
-                        <Tab value='films' onClick={handleClickOnFilms} icon={<MovieIcon />} iconPosition='start' label='Фильмы' />
-                        <Tab value='series' onClick={handleClickOnSeries} icon={<CastConnectedIcon />} iconPosition='start' label='Сериалы' />
-                        <Tab value='persons' onClick={handleClickOnPersons} icon={<PersonIcon />} iconPosition='start' label='Персоны' />
+                        <Tab sx={{
+                            "transition": 'all 0.3s',
+                            "&:hover": {
+                                'transform': 'scale(1.1)',
+
+                            }
+                        }} value='films' onClick={handleClickOnFilms} icon={<MovieIcon />} iconPosition='start' label='Фильмы' />
+                        <Tab sx={{
+                            "transition": 'all 0.3s',
+                            "&:hover": {
+                                'transform': 'scale(1.1)',
+
+                            }
+                        }} value='series' onClick={handleClickOnSeries} icon={<CastConnectedIcon />} iconPosition='start' label='Сериалы' />
+                        <Tab sx={{
+                            "transition": 'all 0.3s',
+                            "&:hover": {
+                                'transform': 'scale(1.1)',
+
+                            }
+                        }} value='persons' onClick={handleClickOnPersons} icon={<PersonIcon />} iconPosition='start' label='Персоны' />
                     </Tabs>
                 </nav>
             </div>

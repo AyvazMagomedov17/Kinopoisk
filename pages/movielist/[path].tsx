@@ -15,13 +15,13 @@ import { $searchByKeywordFilms } from '../../src/models/searchByKeyword'
 import { $topOfFilms, getTopOfFilmsEf } from '../../src/models/topOfFilms'
 
 type Props = {
-    films: ITop,
-    filmi: IFilms,
+    tops: ITop,
+    films: IFilms,
     searchByKeywordFilms: ISearchByKeyword | null
     genresCountriesList: IGenresCountriesList
 }
 
-const MovieList = ({ films, filmi, searchByKeywordFilms, genresCountriesList }: Props) => {
+const MovieList = ({ tops, films, searchByKeywordFilms, genresCountriesList }: Props) => {
 
     const router = useRouter()
     const topsTitle = router.query.path === Object.keys(EGetTopOfFilms)[0] ? '250 лучших фильмов' : router.query.path === Object.keys(EGetTopOfFilms)[1] ? '100 популярных фильмов' : 'Топ ожидаемых фильмов'
@@ -33,13 +33,13 @@ const MovieList = ({ films, filmi, searchByKeywordFilms, genresCountriesList }: 
     if (router.query.path === 'movies') {
         //@ts-ignore
         return <TitleLayout title={ETypeRu[router.query.type]}>
-            <Films genresCountriesList={genresCountriesList} films={filmi} />
+            <Films genresCountriesList={genresCountriesList} films={films} />
         </TitleLayout>
 
     }
     if (router.query.path === Object.keys(EGetTopOfFilms)[1] || router.query.path === Object.keys(EGetTopOfFilms)[0] || router.query.path === Object.keys(EGetTopOfFilms)[2]) {
         return <TitleLayout title={topsTitle}>
-            <TopFilms genresCountriesList={genresCountriesList} films={films} />
+            <TopFilms genresCountriesList={genresCountriesList} films={tops} />
         </TitleLayout>
     }
     if (router.query.path && router.query.path !== Object.keys(EGetTopOfFilms)[1] && router.query.path !== Object.keys(EGetTopOfFilms)[0] && router.query.path !== Object.keys(EGetTopOfFilms)[2] && router.query.path !== 'movies') {
@@ -70,8 +70,8 @@ export async function getServerSideProps({ query }: any) {
     await getGenresCountriesListEf()
     return {
         props: {
-            films: $topOfFilms.getState(),
-            filmi: $films.getState(),
+            tops: $topOfFilms.getState(),
+            films: $films.getState(),
             searchByKeywordFilms: $searchByKeywordFilms.getState(),
             genresCountriesList: $genresCountriesList.getState()
 

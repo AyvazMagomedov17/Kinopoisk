@@ -23,10 +23,10 @@ type Props = {
     boxOffice: IBoxOffice
     seasons: ISeasons
 
+
 }
 
 const FilmMain = ({ film, staff, awards, boxOffice, seasons }: Props) => {
-    const router = useRouter()
     const backroundColor = 'black'
     const boxShadow = film.coverUrl ? 'inset 0 0 0 200vw rgba(0,0,0, 0.8)' : 'none'
     const colorOfText = 'white'
@@ -48,7 +48,7 @@ const FilmMain = ({ film, staff, awards, boxOffice, seasons }: Props) => {
         backround: {
             minHeight: '100vh',
             width: '100vw',
-            backgroundImage: `url(${film.coverUrl || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqT_5D4N6cgDnpZtJpzPFmDsA2zFh6DsaSCw&usqp=CAU'})`,
+            backgroundImage: `url(${film.coverUrl || 'https://www.meme-arsenal.com/memes/4c660384208afd135b5f15b6ed0473be.jpg'})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'top left 50%',

@@ -97,8 +97,23 @@ const FilmMainCenter = ({ film, staff, seasons }: film) => {
             <Grid className={s.paddingBottom} item xs={12}><Typography><span style={{ 'paddingRight': '7px' }}>{film.year} год</span>  {film.countries.map(country => <span key={country.country} style={{ 'paddingRight': '7px' }}>{country.country}</span>)}</Typography></Grid>
             <Grid className={s.paddingBottom} item xs={12}><Typography fontSize={18} >{film.genres[0].genre} {film.genres[1] && film.genres[1].genre}</Typography></Grid>
             <Grid marginBottom={2} className={s.paddingBottom} item xs={12}><Typography fontSize={18} >{film.shortDescription || film.slogan}</Typography></Grid>
-            <Grid className={s.paddingBottom} item xs={10}><a style={{ 'textDecoration': 'none' }} target='__blank' href={film.webUrl}><Button startIcon={<PlayArrowIcon />} color='error' sx={{ borderRadius: 10, minHeight: '50px', marginBottom: '10px' }} fullWidth size='large' variant='outlined'><Typography fontSize={_415px ? 12 : _450px ? 13 : 15}>Открыть на кинопоиске</Typography></Button>    </a></Grid>
-            <Grid className={s.paddingBottom} item xs={10}><a style={{ 'textDecoration': 'none' }} target='__blank' href={`https://kirlovon.dev/Kinopoisk-Watch/?id=${film.kinopoiskId}`}><Button startIcon={<PlayArrowIcon />} color='success' sx={{ borderRadius: 10, minHeight: '50px', marginBottom: '50px' }} fullWidth size='large' variant='contained'><Typography fontSize={_415px ? 12 : _450px ? 13 : 15}>Смотреть бесплатно</Typography></Button></a></Grid>
+            <Grid className={s.paddingBottom} item xs={10}><a style={{ 'textDecoration': 'none' }} target='__blank' href={film.webUrl}><Button startIcon={<PlayArrowIcon />} color='error' sx={{
+                borderRadius: 10,
+                minHeight: '50px',
+                marginBottom: '10px',
+                'transition': 'all 0.5s',
+                '&:hover': {
+                    'transform': 'scale(1.05)',
+                    'transition': 'all 0.5s'
+                }
+            }} fullWidth size='large' variant='outlined'><Typography fontSize={_415px ? 12 : _450px ? 13 : 15}>Открыть на кинопоиске</Typography></Button>    </a></Grid>
+            <Grid className={s.paddingBottom} item xs={10}><a style={{ 'textDecoration': 'none' }} target='__blank' href={`https://kirlovon.dev/Kinopoisk-Watch/?id=${film.kinopoiskId}`}><Button startIcon={<PlayArrowIcon />} color='success' sx={{
+                borderRadius: 10, minHeight: '50px', marginBottom: '50px', 'transition': 'all 0.5s',
+                '&:hover': {
+                    'transform': 'scale(1.05)',
+                    'transition': 'all 0.5s'
+                }
+            }} fullWidth size='large' variant='contained'><Typography fontSize={_415px ? 12 : _450px ? 13 : 15}>Смотреть бесплатно</Typography></Button></a></Grid>
             <Grid marginBottom={3} item xs={12}><Typography fontWeight={600} variant='h4'>О фильме:</Typography></Grid>
             <FilmInfoItem title='Год производства' info={film.year} />
             <FilmInfoItem title='Страны' info={countries} />

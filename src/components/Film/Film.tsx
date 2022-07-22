@@ -1,11 +1,7 @@
-import { useStore } from "effector-react"
-import { useRouter } from "next/router"
-import { useEffect } from "react"
-import { EType } from "../../Interfaces/enums/enums"
-import { $filmId, getBoxOfficeAt, getSeasonsAt, getSeasonsEf, IMainFilm, resetfilm, setFilmId } from "../../models/film"
-import Header from "../common/Header/Header"
+
+import { I$favoriteFilm } from "../../models/favoriteFilms"
+import { IMainFilm } from "../../models/film"
 import FilmInfo from "./FilmInfo/FilmInfo"
-import FilmInfoTabs from "./FilmInfo/FilmInfoTabs"
 import FilmMain from "./FilmMain/FilmMain"
 
 type Props = {

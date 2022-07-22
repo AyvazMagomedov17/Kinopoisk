@@ -2,11 +2,10 @@ import { AppBar, Button, FilledInput, Grid, Input, InputLabel, Toolbar } from "@
 import { Container } from "@mui/system"
 import { useStore } from "effector-react"
 import { Formik } from "formik"
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { $currentPageOfFilms } from "../../../models/currentPageOfFilms"
-import s from '../../../styles/header.module.css'
 import MenuDrawer from "./MenuDrawer"
 import MenuIcon from '@mui/icons-material/Menu';
 import { useMaxWidthQuery } from "../../../hooks/mediaQuery"
@@ -23,6 +22,7 @@ const Header = ({ genresCountriesList }: Props) => {
     const _550px = useMaxWidthQuery(550)
     const _480px = useMaxWidthQuery(480)
     const _375px = useMaxWidthQuery(375)
+    const _900px = useMaxWidthQuery(900)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const [isSearchDrawerOpen, setIsSearchDrawerOpen] = useState(false)
     const router = useRouter()
@@ -49,14 +49,14 @@ const Header = ({ genresCountriesList }: Props) => {
                 <Container fixed>
                     <Toolbar tabIndex={1} >
                         <Grid alignItems='center' container>
-                            <Grid item xs={_480px ? 8 : 6}>
+                            <Grid item xs={_480px ? 8 : 5}>
                                 <a  >
 
                                     <img onClick={handleClickOnLogo} style={{ 'maxWidth': _375px ? '120px' : _550px ? '150px' : _1200px ? '200px' : '300px', 'cursor': 'pointer' }} src='/header/logo.svg' />
 
                                 </a>
                             </Grid>
-                            <Grid item xs={_480px ? 2 : 5}>
+                            <Grid item xs={_480px ? 2 : 6}>
                                 {_480px ? <button onClick={handleClickOnFind}><SearchIcon color="warning" fontSize='large' /></button> : <Formik initialValues={
                                     {
                                         keyword: ''
@@ -75,8 +75,15 @@ const Header = ({ genresCountriesList }: Props) => {
 
                             </Grid>
                             <Grid item xs={1}>
-                                <Button size="large" color="error" onClick={openTheDrawer}><MenuIcon fontSize="large" /></Button>
+                                <Button sx={{
+                                    'transition': 'all 0.3s',
+                                    '&:hover': {
+                                        "transform": 'scale(1.1)',
+                                        'transition': 'all 0.3s'
+                                    }
+                                }} size="large" color="error" onClick={openTheDrawer}><MenuIcon fontSize="large" /></Button>
                             </Grid>
+
 
                         </Grid>
 

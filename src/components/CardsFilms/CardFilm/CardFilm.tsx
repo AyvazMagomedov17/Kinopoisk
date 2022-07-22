@@ -43,8 +43,14 @@ const CardFilm = (props: Props) => {
     const _355px = useMaxWidthQuery(355)
     return (
         <>
-            <Grid item xs={12}>
-                <Card onClick={handleClick} sx={{ 'minHeight': '120px', maxWidth: '800px', 'boxShadow': 'none' }}>
+            <Grid sx={{
+                'transition': 'all 0.3s',
+                '&:hover': {
+                    'transform': 'scale(1.01)',
+                    'transition': 'all 0.3s'
+                }
+            }} item xs={12}>
+                < Card onClick={handleClick} sx={{ 'minHeight': '120px', maxWidth: '800px', 'boxShadow': 'none' }}>
                     <CardActionArea sx={{ 'borderRadius': '20px', 'display': 'flex', 'justifyContent': 'space-between', }} >
                         <CardContent sx={{ 'display': 'flex', 'alignItems': 'center', paddingTop: '15px' }}>
                             <Paper sx={{ 'maxWidth': '60px', marginRight: '20px' }}>
@@ -85,7 +91,7 @@ const CardFilm = (props: Props) => {
                     </CardActionArea>
 
                 </Card>
-            </Grid>
+            </Grid >
             <style jsx>{`
             .imageBox{
                 min-width: 70px;

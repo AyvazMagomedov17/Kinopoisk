@@ -43,9 +43,27 @@ const Filters = ({ baseUrl }: Props) => {
 
     return (
         <Tabs sx={{ borderBottom: 1, borderColor: 'gray' }} value={filtres}>
-            {baseUrl !== SERIES && < Tab value={TOPS} onClick={handleClickOnTops} iconPosition='start' label='Подборки' />}
-            <Tab value={GENRES} onClick={handleClickOnGenres} iconPosition='start' label='Жанры' />
-            <Tab value={COUNTRIES} onClick={handleClickOnCountries} iconPosition='start' label='Страны' />
+            {baseUrl !== SERIES && < Tab sx={{
+                "transition": 'all 0.3s',
+                "&:hover": {
+                    'transform': 'scale(1.1)',
+
+                }
+            }} value={TOPS} onClick={handleClickOnTops} iconPosition='start' label='Подборки' />}
+            <Tab sx={{
+                "transition": 'all 0.3s',
+                "&:hover": {
+                    'transform': 'scale(1.1)',
+
+                }
+            }} value={GENRES} onClick={handleClickOnGenres} iconPosition='start' label='Жанры' />
+            <Tab sx={{
+                "transition": 'all 0.3s',
+                "&:hover": {
+                    'transform': 'scale(1.1)',
+
+                }
+            }} value={COUNTRIES} onClick={handleClickOnCountries} iconPosition='start' label='Страны' />
         </Tabs>
     )
 }

@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import ProgressBar from "../src/components/common/ProgressBar";
 import { AppProps } from 'next/app';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { authFx } from '../src/models/user';
 
 const enhance = withHydrate();
 const theme = createTheme({
@@ -16,7 +17,12 @@ const theme = createTheme({
     },
 });
 function MyApp({ Component, pageProps }: AppProps) {
-
+    const auth = async () => {
+        authFx()
+    }
+    useEffect(() => {
+        auth()
+    }, [])
     const [loading, setLoading] = useState(false)
     const router = useRouter()
     useEffect(() => {
