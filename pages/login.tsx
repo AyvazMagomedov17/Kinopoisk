@@ -11,7 +11,7 @@ type Props = {
 
 }
 
-const login = ({ genresCountriesList }: Props) => {
+const Login = ({ genresCountriesList }: Props) => {
     const isNeedToBack = useStore($isNeedToBack)
     const user = useStore($user)
     useEffect(() => {
@@ -41,4 +41,4 @@ export async function getServerSideProps({ query }: any) {
     }
 }
 
-export default login
+export default Login

@@ -10,7 +10,7 @@ type Props = {
     genresCountriesList: IGenresCountriesList
 }
 
-const registration = ({ genresCountriesList }: Props) => {
+const Registration = ({ genresCountriesList }: Props) => {
     const isNeedToBack = useStore($isNeedToBack)
     const user = useStore($user)
     useEffect(() => {
@@ -36,4 +36,4 @@ export async function getServerSideProps({ query }: any) {
         }
     }
 }
-export default registration
+export default Registration
