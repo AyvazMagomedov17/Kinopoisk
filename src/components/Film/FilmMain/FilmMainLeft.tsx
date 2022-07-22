@@ -91,7 +91,7 @@ const FilmMainLeft = ({ film, awards, staff }: Props) => {
                 </Grid>
                 <FilmAwards awards={awards} />
                 <FilmMainActors staff={staff} />
-            </>
+            </>}
             {isAddedInFavorite && <Alert sx={{ 'position': 'fixed', 'bottom': '20px', 'left': '20px', 'zIndex': 100000 }} variant="filled" severity="success">Фильм добавлен в <Link style={{ 'color': "#ffff" }} target='__blank' href="/favorites">избранное</Link>  </Alert>}
             {isDeletedInFavorite && <Alert sx={{ 'position': 'fixed', 'bottom': '20px', 'left': '20px', 'zIndex': 100000 }} variant="filled" severity="warning">Фильм удален из <Link style={{ 'color': "#ffff" }} target='__blank' href="/favorites" >избранного</Link></Alert>}
             {isNotAuth && !user?.isAuth && <Alert onClose={() => { }} sx={{ 'position': 'absolute', 'bottom': '50%', 'left': '50%', 'zIndex': 100000, transform: 'translate(-50%, -50%)', }} variant="filled" severity="error">
